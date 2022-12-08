@@ -39,3 +39,83 @@ public:
         return 0;
     }
 };
+class GPS_System {
+public:
+    string name;
+    vector <dat*> vec;
+    void add_sensor(dat* obj)
+    {
+        //---------------------------
+        Profiler  One;
+        cout << "Метод add_sensor";
+        //---------------------------
+        
+        vec.push_back(obj);
+  
+        
+    }
+    void measure_acc()
+    {
+        //---------------------------
+        Profiler  Two;
+        //---------------------------
+        for (long long unsigned int i = 0; i < vec.size(); ++i)
+        {
+            if (vec[i]->measure_unit == "g")
+            {
+                cout << "Acceleration = " << vec[i]->measure() << " g" << endl;
+            }
+        }
+        //---------------------------
+        cout << "Метод measure_acc";
+        //---------------------------
+    }
+
+    void measure_gyro()
+    {
+        //---------------------------
+        Profiler  Three;
+        //---------------------------
+        for (long long unsigned int j = 0; j < vec.size(); j++)
+        {
+            if (vec[j]->measure_unit == "gradus")
+            {
+                cout << "Angle = " << vec[j]->measure() << " gradus" << endl;
+            }
+        }
+        //---------------------------
+        cout << "Метод measure_gyro";
+        //---------------------------
+    }
+
+    void measure_position()
+    {
+        //---------------------------
+        Profiler  Four;
+        //---------------------------
+        for (long long unsigned int k = 0; k < vec.size(); ++k)
+        {
+            if (vec[k]->measure_unit == "km")
+            {
+                cout << "Position = " << vec[k]->measure() << " km" << endl;
+            }
+        }
+        //---------------------------
+        cout << "Метод measure_position";
+        //---------------------------
+    }
+
+    void list_sensors()
+    {
+        //---------------------------
+        Profiler  Five;
+        //---------------------------
+        for (long long unsigned int k = 0; k < vec.size(); ++k) {
+            cout << vec[k]->name << " ";
+        }
+        cout << endl;
+        //---------------------------
+        cout << "Метод list_sensors ";
+        //---------------------------
+    }
+};
