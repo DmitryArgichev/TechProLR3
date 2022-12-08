@@ -119,3 +119,28 @@ public:
         //---------------------------
     }
 };
+
+
+//////////////////////датчики///////////////////////////////////////////////
+class Acceleration : public dat
+{
+public:
+    Acceleration() :dat()
+    {
+        name = "Acceleration";
+        measure_unit = "g";//единица измерения g-перегрузка
+        min_measure_range = 0.0;
+        max_measure_range = 500.0;
+    }
+    double measure()
+    {
+        //---------------------------
+        Profiler  Six;
+        cout << "Метод measure";
+        //---------------------------
+        std::random_device rd;
+        std::mt19937 e2(rd());
+        std::uniform_real_distribution<> dist(min_measure_range, max_measure_range);
+        return dist(e2);
+    }
+};
