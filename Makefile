@@ -1,9 +1,9 @@
 all: rebuild 
 
-rebuild: main.cpp
-	g++ -Wall -Werror main.cpp -o main.exe
-	./main.exe
+rebuild: TechProLR3.cpp
+	g++ -Wall -Werror TechProLR3.cpp -o TechProLR3.exe
+	./TechProLR3.exe
 clean:
-	rm main.exe
+	rm TechProLR3.exe
 	
 	

@@ -87,49 +87,6 @@ public:
     }
 };
 
-int main()
-{
-    setlocale(LC_ALL, "Russian");
-    int n;
-    GPS_System A;
-    Acceleration B;
-    Gyroscop D;
-    Position C;
-    cout << "Welcome GPS_System" << endl;
-    cout << "Which sensor do you want to connect?" << endl;
-    do {
-        cout << "To connect the Accelerometer, press - 1" << endl;
-        cout << "To connect the Gyroscope, press - 2 " << endl;
-        cout << "To connect the Position, press - 3 " << endl;
-        cout << "To write all name, press - 4 " << endl;
-        cout << "To end the program, press - 5 " << endl;
-        cin >> n;
-        switch (n)
-        {
-        case 1:
-            A.add_sensor(&B);
-            A.measure_acc();
-            break;
-        case 2:
-            A.add_sensor(&D);
-            A.measure_gyro();
-            break;
-        case 3:
-            A.add_sensor(&C);
-            A.measure_position();
-            break;
-        case 4:
-            A.list_sensors();
-            break;
-        case 5:
-            break;
-        default: continue;
-        }
-
-    } while (n != 5);
-    return 0;
-}
-
 class GPS_System {
 public:
     string name;
@@ -235,3 +192,46 @@ public:
         return dist(e2);
     }
 };
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int n;
+    GPS_System A;
+    Acceleration B;
+    Gyroscop D;
+    Position C;
+    cout << "Welcome GPS_System" << endl;
+    cout << "Which sensor do you want to connect?" << endl;
+    do {
+        cout << "To connect the Accelerometer, press - 1" << endl;
+        cout << "To connect the Gyroscope, press - 2 " << endl;
+        cout << "To connect the Position, press - 3 " << endl;
+        cout << "To write all name, press - 4 " << endl;
+        cout << "To end the program, press - 5 " << endl;
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            A.add_sensor(&B);
+            A.measure_acc();
+            break;
+        case 2:
+            A.add_sensor(&D);
+            A.measure_gyro();
+            break;
+        case 3:
+            A.add_sensor(&C);
+            A.measure_position();
+            break;
+        case 4:
+            A.list_sensors();
+            break;
+        case 5:
+            break;
+        default: continue;
+        }
+
+    } while (n != 5);
+    return 0;
+}
