@@ -23,7 +23,7 @@ public:
     ~Profiler()
     {
         steady_clock::time_point end_time_ = steady_clock::now();
-        cout << " длительность выполнения: " << duration_cast<milliseconds>(end_time_ - start).count() << "ms ";
+        cout << " lead time " << duration_cast<milliseconds>(end_time_ - start).count() << "ms ";
         cout << endl;
     }
 };
@@ -54,7 +54,7 @@ public:
     {
         //---------------------------
         Profiler  Seven;
-        cout << "Метод measure";
+        cout << "Metod measure";
         //---------------------------
         std::random_device rd;
         std::mt19937 e2(rd());
@@ -95,7 +95,7 @@ public:
     {
         //---------------------------
         Profiler  One;
-        cout << "Метод add_sensor";
+        cout << "Metod add_sensor";
         //---------------------------
         
         vec.push_back(obj);
@@ -115,7 +115,7 @@ public:
             }
         }
         //---------------------------
-        cout << "Метод measure_acc";
+        cout << "Metod measure_acc";
         //---------------------------
     }
 
@@ -132,7 +132,7 @@ public:
             }
         }
         //---------------------------
-        cout << "Метод measure_gyro";
+        cout << "Metod measure_gyro";
         //---------------------------
     }
 
@@ -149,7 +149,7 @@ public:
             }
         }
         //---------------------------
-        cout << "Метод measure_position";
+        cout << "Metod measure_position";
         //---------------------------
     }
 
@@ -163,7 +163,7 @@ public:
         }
         cout << endl;
         //---------------------------
-        cout << "Метод list_sensors ";
+        cout << "Metod list_sensors ";
         //---------------------------
     }
 };
@@ -184,7 +184,7 @@ public:
     {
         //---------------------------
         Profiler  Six;
-        cout << "Метод measure";
+        cout << "Metod measure";
         //---------------------------
         std::random_device rd;
         std::mt19937 e2(rd());
@@ -195,7 +195,6 @@ public:
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     int n;
     GPS_System A;
     Acceleration B;
