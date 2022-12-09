@@ -23,7 +23,7 @@ public:
     ~Profiler()
     {
         steady_clock::time_point end_time_ = steady_clock::now();
-        cout << " lead time " << duration_cast<milliseconds>(end_time_ - start).count() << "ms ";
+        cout << "time: " << duration_cast<milliseconds>(end_time_ - start).count() << "ms ";
         cout << endl;
     }
 };
@@ -40,6 +40,76 @@ public:
     }
 };
 
+
+class GPS_System {
+public:
+    string name;
+    vector <dat*> vec;
+    void add_sensor(dat* obj)
+    {
+        vec.push_back(obj);
+    }
+    void measure_acc()
+    {
+        for (long long unsigned int i = 0; i < vec.size(); ++i)
+        {
+            if (vec[i]->measure_unit == "g")
+            {
+                vec[i]->measure();
+            }
+        }
+    }
+
+    void measure_gyro()
+    {
+        for (long long unsigned int j = 0; j < vec.size(); j++)
+        {
+            if (vec[j]->measure_unit == "gradus")
+            {
+                vec[j]->measure();
+            }
+        }
+    }
+
+    void measure_position()
+    {
+        for (long long unsigned int k = 0; k < vec.size(); ++k)
+        {
+            if (vec[k]->measure_unit == "km")
+            {
+                vec[k]->measure();
+            }
+        }
+    }
+
+    void list_sensors()
+    {
+        for (long long unsigned int k = 0; k < vec.size(); ++k) {
+             vec[k]->name;
+        }
+    }
+};
+
+//////////////////////датчики///////////////////////////////////////////////
+class Acceleration : public dat
+{
+public:
+    Acceleration() :dat()
+    {
+        name = "Acceleration";
+        measure_unit = "g";//единица измерения g-перегрузка
+        min_measure_range = 0.0;
+        max_measure_range = 500.0;
+    }
+    double measure()
+    {
+        std::random_device rd;
+        std::mt19937 e2(rd());
+        std::uniform_real_distribution<> dist(min_measure_range, max_measure_range);
+        return dist(e2);
+    }
+};
+
 class Gyroscop : public dat
 {
 public:
@@ -52,10 +122,6 @@ public:
     }
     double measure()
     {
-        //---------------------------
-        Profiler  Seven;
-        cout << "Metod measure";
-        //---------------------------
         std::random_device rd;
         std::mt19937 e2(rd());
         std::uniform_real_distribution<> dist(min_measure_range, max_measure_range);
@@ -76,116 +142,6 @@ public:
     }
     double measure()
     {
-        //---------------------------
-        Profiler  Eight;
-        cout << "Метод measure";
-        //---------------------------
-        std::random_device rd;
-        std::mt19937 e2(rd());
-        std::uniform_real_distribution<> dist(min_measure_range, max_measure_range);
-        return dist(e2);
-    }
-};
-
-class GPS_System {
-public:
-    string name;
-    vector <dat*> vec;
-    void add_sensor(dat* obj)
-    {
-        //---------------------------
-        Profiler  One;
-        cout << "Metod add_sensor";
-        //---------------------------
-        
-        vec.push_back(obj);
-  
-        
-    }
-    void measure_acc()
-    {
-        //---------------------------
-        Profiler  Two;
-        //---------------------------
-        for (long long unsigned int i = 0; i < vec.size(); ++i)
-        {
-            if (vec[i]->measure_unit == "g")
-            {
-                cout << "Acceleration = " << vec[i]->measure() << " g" << endl;
-            }
-        }
-        //---------------------------
-        cout << "Metod measure_acc";
-        //---------------------------
-    }
-
-    void measure_gyro()
-    {
-        //---------------------------
-        Profiler  Three;
-        //---------------------------
-        for (long long unsigned int j = 0; j < vec.size(); j++)
-        {
-            if (vec[j]->measure_unit == "gradus")
-            {
-                cout << "Angle = " << vec[j]->measure() << " gradus" << endl;
-            }
-        }
-        //---------------------------
-        cout << "Metod measure_gyro";
-        //---------------------------
-    }
-
-    void measure_position()
-    {
-        //---------------------------
-        Profiler  Four;
-        //---------------------------
-        for (long long unsigned int k = 0; k < vec.size(); ++k)
-        {
-            if (vec[k]->measure_unit == "km")
-            {
-                cout << "Position = " << vec[k]->measure() << " km" << endl;
-            }
-        }
-        //---------------------------
-        cout << "Metod measure_position";
-        //---------------------------
-    }
-
-    void list_sensors()
-    {
-        //---------------------------
-        Profiler  Five;
-        //---------------------------
-        for (long long unsigned int k = 0; k < vec.size(); ++k) {
-            cout << vec[k]->name << " ";
-        }
-        cout << endl;
-        //---------------------------
-        cout << "Metod list_sensors ";
-        //---------------------------
-    }
-};
-
-
-//////////////////////датчики///////////////////////////////////////////////
-class Acceleration : public dat
-{
-public:
-    Acceleration() :dat()
-    {
-        name = "Acceleration";
-        measure_unit = "g";//единица измерения g-перегрузка
-        min_measure_range = 0.0;
-        max_measure_range = 500.0;
-    }
-    double measure()
-    {
-        //---------------------------
-        Profiler  Six;
-        cout << "Metod measure";
-        //---------------------------
         std::random_device rd;
         std::mt19937 e2(rd());
         std::uniform_real_distribution<> dist(min_measure_range, max_measure_range);
@@ -195,6 +151,7 @@ public:
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     int n;
     GPS_System A;
     Acceleration B;
@@ -203,34 +160,77 @@ int main()
     cout << "Welcome GPS_System" << endl;
     cout << "Which sensor do you want to connect?" << endl;
     do {
-        cout << "To connect the Accelerometer, press - 1" << endl;
-        cout << "To connect the Gyroscope, press - 2 " << endl;
-        cout << "To connect the Position, press - 3 " << endl;
-        cout << "To write all name, press - 4 " << endl;
-        cout << "To end the program, press - 5 " << endl;
+        cout << "Runtime method add_sensor to Acceleration , press - 1" << endl;
+        cout << "Runtime method measure_acc, press - 2 " << endl;
+        cout << "Runtime method add_sensor to Gyroscop, press - 3 " << endl;
+        cout << "Runtime method measure_gyro, press - 4 " << endl;
+        cout << "Runtime method add_sensor to Position , press - 5" << endl;
+        cout << "Runtime method measure_position, press - 6 " << endl;
+        cout << "Runtime method list_sensors, press - 7 " << endl;
+        cout << "To end the program, press - 8 " << endl;
         cin >> n;
         switch (n)
         {
         case 1:
-            A.add_sensor(&B);
+        {
+            Profiler One;
+            for (int i = 0;i < 100000;++i)
+            {
+                A.add_sensor(&B);
+            }
+            break;
+        }
+        case 2:
+        {
+            Profiler Two;
             A.measure_acc();
             break;
-        case 2:
-            A.add_sensor(&D);
+        }
+        case 3:
+        {
+            Profiler Three;
+            for (int i = 0;i < 100000;++i)
+            {
+                A.add_sensor(&D);
+            }
+            break;
+        }
+        case 4:
+        {
+            Profiler Four;
             A.measure_gyro();
             break;
-        case 3:
-            A.add_sensor(&C);
+        }
+        case 5:
+        {
+            Profiler Five;
+            for (int i = 0;i < 100000;++i)
+            {
+                A.add_sensor(&C);
+            }
+            break;
+        }
+        case 6:
+        {
+            Profiler Six;
             A.measure_position();
             break;
-        case 4:
-            A.list_sensors();
+        }
+        case 7:
+        {
+            Profiler Seven;
+            for (int i = 0;i < 1000;++i)
+            {
+                A.list_sensors();
+            }
             break;
-        case 5:
+        }
+        case 8:
             break;
         default: continue;
         }
 
-    } while (n != 5);
+    } while (n != 8);
     return 0;
 }
+
