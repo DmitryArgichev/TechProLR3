@@ -26,25 +26,22 @@
     Создан класс profiler в конструкторе, с помощью которого засекается время, а в деструкторе выводится в консоль длительность существования класса.
 
 	Для проверки использован следующий код:
-            #include <chrono>
-            #include <iostream>
-            #include <thread>
-
-            using namespace std;
-            using namespace chrono;
-            using namespace literals;
-
-            int main() {
-            cout << "Ожидание 5 сек..."s << endl;
-            Profiler  sleep_guard;
-            this_thread::sleep_for(5s);
-            cout << "Ожидание завершено"s << endl;
-            }
-
-            В результате в консоль выведено:
-            Ожидание 5 сек...
-            Ожидание завершено
-            Время выполнение блока 5011 мсек
+     #include <chrono>
+     #include <iostream>
+     #include <thread>
+     using namespace std;
+     using namespace chrono;
+     using namespace literals;
+	int main() {
+	cout << "Ожидание 5 сек..."s << endl;
+	Profiler  sleep_guard;
+ 	this_thread::sleep_for(5s);
+	cout << "Ожидание завершено"s << endl;
+	}
+В результате в консоль выведено:
+Ожидание 5 сек...
+Ожидание завершено
+Время выполнение блока 5011 мсек
 
 
 5. Сборка и отладка программы. Сборка производилась через консоль PowerShell. Для удобства сборки был использован makefile.
